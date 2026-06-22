@@ -1,348 +1,231 @@
-# HRMS (Human Resource Management System)
+# Human Resource Management System (HRMS)
 
-##  Mevcut Diller / Available Languages
-[🇹🇷 Türkçe](#türkçe) | [🇬🇧 English](#english)
+A full-stack Human Resource Management System (HRMS) built using **Java Spring Boot**, **Hibernate/JPA**, **MySQL**, **HTML**, **CSS**, **JavaScript**, and **Bootstrap**.
 
----
-## Türkçe 
-
-### Proje Açıklaması
-HRMS (İnsan Kaynakları Yönetim Sistemi) projesi, iş ilanlarının, iş başvurularının, işveren ve iş arayan bilgilerinin yönetildiği, Spring Boot tabanlı bir web servis uygulamasıdır.  
-Proje, REST API mimarisi ile geliştirilmiş olup, **DTO**, **Request-Response Pattern**, **Validation** ve **Global Exception Handling** gibi modern yazılım geliştirme tekniklerini içermektedir.
-
+The application provides a modern dashboard for managing job advertisements, employers, job seekers, applications, cities, job positions, and HR employees.
 ---
 
-### Özellikler
-- **Şehir Yönetimi**: Şehir ekleme, listeleme.
-- **İş Pozisyonu Yönetimi**: Pozisyon ekleme ve listeleme
-- **İşveren Yönetimi**: İşveren kaydı ve listeleme.
-- **İş arayan Yönetimi**: İş arayan kaydı ve listeleme.
-- **İş İlanı Yönetimi**: İş ilanı ekleme, listeleme, filtreleme.
-- **İş Başvurusu Yönetimi**: Adayların iş ilanlarına başvuru yapabilmesi.
-- **Hata Yönetimi**: `@ControllerAdvice` ile global exception handling.
-- **Validasyon**: `@NotBlank`, `@Size` `@Email`, `@Future` gibi anotasyonlarla doğrulama.
+## 🚀 Features
+### 📊 Dashboard
+* Real-time statistics
+* Active job advertisements
+* Cities and job positions overview
+* Automatic data refresh
 
+### 💼 Job Advertisements
+* Create and manage job postings
+* View active/inactive advertisements
+* Search and filter advertisements
+* Track applications for each job
+
+### 👥 Employers Management
+* Register employers
+* View employer details
+* Company website integration
+
+### 🧑‍💻 Job Seekers Management
+* Register candidates
+* Manage job seeker profiles
+* Search functionality
+
+### 📝 Job Applications
+* Apply for jobs
+* View applications by advertisement
+* View applications by job seeker
+* Update application status
+
+### ⚙️ Configuration
+* Manage cities
+* Manage job positions
+* Manage HR employees
+
+### 🔌 API Explorer
+* Configure backend URL
+* Test API endpoints
+* Send custom API requests
+* View JSON responses
 ---
 
-###  Kullanılan Teknolojiler
-| Katman | Teknoloji |
-|---|---|
-| Dil | Java 17 |
-| Framework | Spring Boot 3 |
-| ORM | Spring Data JPA / Hibernate |
-| Veritabanı | PostgreSQL |
-| Test | JUnit 5, MockMvc |
-| Yardımcı | Lombok, Jackson, Jakarta Validation |
+# 🛠️ Technologies Used
+## Backend
+* Java 21
+* Spring Boot
+* Spring MVC
+* Spring Data JPA
+* Hibernate
+* Maven
+* MySQL
 
----
-###  Proje Katmanları
-- **Entity**: Veritabanı tablolarını temsil eden sınıflar.
-- **DTO**: Kullanıcıya döndürülecek veri transfer objeleri.
-- **Request**: Kullanıcıdan alınacak verileri temsil eden sınıflar.
-- **Service**: İş mantığı katmanı.
-- **Repository (DAO)**: Veritabanı erişim katmanı.
-- **Controller**: API uç noktalarının bulunduğu katman.
-- **Core Utilities**: `Result`, `DataResult`, `SuccessResult`, `ErrorResult` gibi ortak dönüş yapıları.
+## Frontend
+* HTML5
+* CSS3
+* JavaScript (ES6)
+* Bootstrap 5
+* Bootstrap Icons
 
-**Result Yapısı:**
-- `Result`: İşlem sonucu (başarılı / başarısız) ve mesaj döner.
-- `DataResult<T>`: İşlem sonucu + veri döner.
-- `SuccessResult`, `ErrorResult`: Başarılı veya hatalı işlem durumları için hazır sınıflar.
-
+## Tools
+* Eclipse IDE
+* Postman
+* Git
+* GitHub
+* MySQL Workbench
 ---
 
-###  Örnek API Endpoint'leri
-| HTTP | Endpoint | Açıklama |
-|------|----------|----------|
-| POST | `/api/employers/register` | Yeni işveren kaydı |
-| GET  | `/api/employers/getAll` | Tüm işverenleri listele |
-| POST | `/api/candidateController/register` | Yeni aday kaydı |
-| GET  | `/api/candidateController/getAll` | Tüm adayları listele |
-| POST | `/api/jobAdvertisements/add` | Yeni iş ilanı ekle |
-| GET  | `/api/jobAdvertisements/getAll` | Tüm iş ilanlarını listele |
-| POST | `/api/jobApplications/apply` | Adayın ilana başvurması |
-
----
-
-### API Endpoint'leri
-
-#### Şehirler
-| Metod | Endpoint | Açıklama |
-|---|---|---|
-| POST | `/api/cities/add` | Yeni şehir ekle |
-| GET | `/api/cities/getAll` | Tüm şehirleri listele |
-
-#### İşverenler
-| Metod | Endpoint | Açıklama |
-|---|---|---|
-| POST | `/api/employers/register` | Yeni işveren kaydı |
-| GET | `/api/employers/getAll` | Tüm işverenleri listele |
-
-#### İş Arayanlar
-| Metod | Endpoint | Açıklama |
-|---|---|---|
-| POST | `/api/candidateController/register` | Yeni aday kaydı |
-| GET | `/api/candidateController/getAll` | Tüm adayları listele |
-
-#### İş İlanları
-| Metod | Endpoint | Açıklama |
-|---|---|---|
-| POST | `/api/jobAdvertisements/add` | Yeni iş ilanı ekle |
-| GET | `/api/jobAdvertisements/getAll` | Tüm ilanları listele |
-
-#### İş Başvuruları
-| Metod | Endpoint | Açıklama |
-|---|---|---|
-| POST | `/api/jobApplications/apply` | İlana başvur |
-
-### Örnek İstekler
-
-**İşveren Kaydı**
-```json
-POST /api/employers/register
-{
-  "companyName": "Tech Solutions Ltd.",
-  "companyWebPage": "https://techsolutions.com",
-  "email": "contact@techsolutions.com",
-  "phoneNumber": "+90-555-123-4567",
-  "password": "password123",
-  "confirmPassword": "password123"
-}
-```
-
-**İş İlanı Ekleme**
-```json
-POST /api/jobAdvertisements/add
-{
-  "description": "Spring Boot deneyimli Java Backend Developer arıyoruz.",
-  "openPositionCount": 2,
-  "minSalary": 30000,
-  "maxSalary": 50000,
-  "applicationDeadline": "2025-12-31",
-  "jobPositionId": 1,
-  "cityId": 1,
-  "employerId": 1
-}
-```
-
-### Testler
-
-JUnit 5 ve MockMvc ile yazılmış 27 birim ve entegrasyon testi.
-
-| Test Sınıfı | Tür | Ne Test Ediyor |
-|---|---|---|
-| `CityDaoTest` | Birim | Kaydetme, duplicate isim kısıtlaması |
-| `CityControllerTest` | Entegrasyon | API yanıtları, validasyon |
-| `EmployerDaoTest` | Birim | Kaydetme, duplicate email kısıtlaması |
-| `JobSeekerDaoTest` | Birim | Kaydetme, duplicate email ve TC kimlik kısıtlaması |
-| `JobPositionDaoTest` | Birim | Kaydetme ve listeleme |
-| `JobAdvertisementDaoTest` | Birim | İlişkili entity ile kaydetme |
-| `JobAdvertisementControllerTest` | Entegrasyon | İlan API yanıtları |
-| `JobApplicationDaoTest` | Birim | Başvuru kaydetme ve durum kontrolü |
-
-```bash
-mvn test
-# Tests run: 27, Failures: 0, Errors: 0
-```
-
-### Kurulum
-
-```bash
-# 1. Repoyu klonla
-git clone https://github.com/sedabasaran/hmrs-app.git
-cd hmrs-app
-
-# 2. Veritabanı oluştur
-psql -U postgres -c "CREATE DATABASE hrms;"
-
-# 3. application.properties güncelle
-spring.datasource.url=jdbc:postgresql://localhost:5432/hrms
-spring.datasource.username=kullanici_adi
-spring.datasource.password=sifre
-
-# 4. Çalıştır
-mvn spring-boot:run
-```
-
-API `http://localhost:8080` adresinde çalışır.
-
-### Yanıt Yapısı
-
-Tüm endpoint'ler tutarlı bir yanıt formatı döndürür:
-
-```json
-{
-  "message": "İşlem başarılı.",
-  "success": true,
-  "data": { }
-}
-```
+# 📁 Project Structure
+--text
+hrms/
+│
+├── backend/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   ├── entity/
+│   ├── dto/
+│   └── config/
+│
+├── frontend/
+│   ├── index.html
+│   ├── css/
+│   │    └── style.css
+│   └── js/
+│        └── script.js
+│
+└── README.md
 
 ---
 
-## English
+# ⚙️ Prerequisites
+Before running the project, install:
+* Java JDK 21
+* Maven
+* MySQL Server
+* Eclipse IDE or IntelliJ IDEA
+* Git
+---
 
-### Project Description
+# 🗄️ Database Configuration
+Create a database:
+--SQL
+CREATE DATABASE hrms;
 
-HRMS (Human Resource Management System) is a Spring Boot REST API for managing job postings, employer registrations, candidate applications, and hiring workflows. It implements DTO, Request-Response Pattern, Validation, and Global Exception Handling.
-
-### Features
-
-- **City Management** — Add and list cities with unique name constraint
-- **Job Position Management** — Add and list job positions
-- **Employer Management** — Register and list employers
-- **Candidate Management** — Register and list job seekers
-- **Job Advertisement Management** — Add, list, and filter job advertisements
-- **Job Application Management** — Candidates can apply for job advertisements
-- **Global Exception Handling** — Consistent error responses via `@ControllerAdvice`
-- **Field Validation** — Jakarta Validation annotations (`@NotBlank`, `@Size`, `@Email`, `@Future`)
-
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Language | Java 17 |
-| Framework | Spring Boot 3 |
-| ORM | Spring Data JPA / Hibernate |
-| Database | PostgreSQL |
-| Testing | JUnit 5, MockMvc |
-| Utilities | Lombok, Jackson, Jakarta Validation |
-
-### Architecture
-
-```
-controller/     → REST API endpoints
-service/        → Business logic
-repository/     → Database access (Spring Data JPA)
-entity/         → Database table mappings
-dto/            → API response objects
-request/        → Incoming request models
-core/           → Shared result structures (Result, DataResult, SuccessResult, ErrorResult)
-```
-
-### API Endpoints
-
-#### Cities
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/cities/add` | Add a new city |
-| GET | `/api/cities/getAll` | List all cities |
-
-#### Employers
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/employers/register` | Register a new employer |
-| GET | `/api/employers/getAll` | List all employers |
-
-#### Job Seekers
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/candidateController/register` | Register a new candidate |
-| GET | `/api/candidateController/getAll` | List all candidates |
-
-#### Job Advertisements
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/jobAdvertisements/add` | Add a new job advertisement |
-| GET | `/api/jobAdvertisements/getAll` | List all job advertisements |
-
-#### Job Applications
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/jobApplications/apply` | Apply for a job advertisement |
-
-### Sample Requests
-
-**Register Employer**
-```json
-POST /api/employers/register
-{
-  "companyName": "Tech Solutions Ltd.",
-  "companyWebPage": "https://techsolutions.com",
-  "email": "contact@techsolutions.com",
-  "phoneNumber": "+90-555-123-4567",
-  "password": "password123",
-  "confirmPassword": "password123"
-}
-```
-**Candidate Registration:**
-```json
-{
-    "name": "Aysu",
-    "lastName": "Ay",
-    "nationalId": "12345678901",
-    "birthDate": 1995,
-    "email": "aysu@example.com",
-    "password": "password123",
-    "confirmPassword": "password123"
-}
-
-**Add Job Advertisement**
-```json
-POST /api/jobAdvertisements/add
-{
-  "description": "We are looking for a Java Backend Developer with Spring Boot experience.",
-  "openPositionCount": 2,
-  "minSalary": 30000,
-  "maxSalary": 50000,
-  "applicationDeadline": "2025-12-31",
-  "jobPositionId": 1,
-  "cityId": 1,
-  "employerId": 1
-}
-```
-
-### Tests
-
-27 unit and integration tests written with JUnit 5 and MockMvc.
-
-| Test Class | Type | What it tests |
-|---|---|---|
-| `CityDaoTest` | Unit | Save, duplicate city name constraint |
-| `CityControllerTest` | Integration | API responses, validation |
-| `EmployerDaoTest` | Unit | Save, duplicate email constraint |
-| `JobSeekerDaoTest` | Unit | Save, duplicate email and national ID |
-| `JobPositionDaoTest` | Unit | Save and retrieve |
-| `JobAdvertisementDaoTest` | Unit | Save with relations |
-| `JobAdvertisementControllerTest` | Integration | Advertisement API responses |
-| `JobApplicationDaoTest` | Unit | Application save and status |
-
-```bash
-mvn test
-# Tests run: 27, Failures: 0, Errors: 0
-```
-
-### Setup
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/sedabasaran/hmrs-app.git
-cd hmrs-app
-
-# 2. Create database
-psql -U postgres -c "CREATE DATABASE hrms;"
-
-# 3. Update application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/hrms
-spring.datasource.username=your_username
+Update application.properties:
+-- properties
+spring.datasource.url=jdbc:mysql://localhost:3306/hrms
+spring.datasource.username=root
 spring.datasource.password=your_password
 
-# 4. Run
-mvn spring-boot:run
-```
-
-API will be available at `http://localhost:8080`
-
-### Response Structure
-
-```json
-{
-  "message": "Operation successful.",
-  "success": true,
-  "data": { }
-}
-```
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 ---
-=======
-# HMRS-App
-Java Human Resource Management System
+
+# ▶️ Running the Backend
+
+Clone the repository:
+git clone https://github.com/yourusername/hrms.git
+
+Navigate to the project:
+cd hrms
+
+Run the application:
+mvn spring-boot:run
+
+Backend will start on:
+http://localhost:8080
+---
+
+# 🌐 Running the Frontend
+Simply open:
+frontend/index.html
+
+
+Or deploy the frontend using:
+
+* Apache Tomcat
+* Spring Boot Static Resources
+* VS Code Live Server
+---
+
+# 🔗 API Endpoints
+
+## Job Advertisements
+GET    /api/jobPost/getAll
+POST   /api/jobPost/add
+
+
+## Employers
+GET    /api/employers/getAll
+POST   /api/employers/register
+
+## Job Seekers
+GET    /api/candidateController/getAll
+POST   /api/candidateController/register
+
+## Cities
+GET    /api/cities/getAll
+POST   /api/cities/add
+
+## Job Positions
+GET    /api/jobPosition/getAll
+POST   /api/jobPosition/add
+
+## Applications
+POST   /api/applications/apply
+GET    /api/applications/by-advertisement/{id}
+GET    /api/applications/by-jobseeker/{id}
+POST   /api/applications/update-status
+
+
+---
+
+# ✨ Features Implemented
+
+* Responsive UI
+* Dashboard Statistics
+* CRUD Operations
+* Search and Filtering
+* API Explorer
+* Toast Notifications
+* Form Validation
+* Automatic Data Refresh
+* Modern Admin Dashboard Design
+---
+
+# 📸 Screenshots
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+### Advertisement
+![Advertisement](screenshots/advertisement.png)
+### Applications
+![Applications](screenshots/applications.png)
+### API Explorer
+![API Explorer](screenshots/api-explorer.png)
+### Employers Page
+![Employers Page](screenshots/employers.png)
+### Job Seekers Page
+![Job Seekers Page](screenshots/job-seekers.png)
+---
+
+# 🔮 Future Enhancements
+* JWT Authentication
+* Role-Based Authorization
+* Email Notifications
+* Resume Upload
+* Reports and Analytics
+* Charts and Graphs
+* Dark Mode
+* Docker Deployment
+---
+
+# 👨‍💻 Author
+**Yogeshwar Bangar**
+Java Full Stack Developer
+* Java
+* Spring Boot
+* Hibernate
+* MySQL
+* HTML/CSS/JavaScript
+* React
+
+
