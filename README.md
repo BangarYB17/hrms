@@ -218,9 +218,9 @@ POST   /api/applications/update-status
 * Docker Deployment
 ---
 
-# 👨‍💻 Author
+#👨‍💻 Author
 **Yogeshwar Bangar**
-*   [Java Full Stack Developer]*
+*[Java Full Stack Developer]*
 * Java
 * Spring Boot
 * Hibernate
