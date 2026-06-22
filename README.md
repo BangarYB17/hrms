@@ -219,7 +219,7 @@ POST   /api/applications/update-status
 ---
 
 # 👨‍💻 Author
-**Yogeshwar Bangar**
+#Yogeshwar Bangar**
 *Java Full Stack Developer*
 * Java
 * Spring Boot
